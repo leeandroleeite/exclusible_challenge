@@ -1,6 +1,7 @@
 // Import dependencies
 import express from 'express';
 import mongoose from 'mongoose';
+import routes from './routes/routes';
 
 // Connect to the database - MongoDB
 mongoose.connect('mongodb://localhost/exclusible', () => {
@@ -8,9 +9,6 @@ mongoose.connect('mongodb://localhost/exclusible', () => {
 })
 
 const app = express();
-
-app.get('/', (req: any, res: any) => {
-    res.send('Hello Exclusible')
-})
+app.use('/api', routes)
 
 app.listen(8000)
