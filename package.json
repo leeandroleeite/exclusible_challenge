@@ -1,0 +1,31 @@
+{
+  "name": "exclusible_challenge",
+  "version": "1.0.0",
+  "description": "Simple app for user registering API with NodeJS, that will be consumed by a React/NextJS front end.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/leeandroleeite/exclusible_challenge.git"
+  },
+  "keywords": [
+    "exclusible",
+    "challenge",
+    "nodeJS",
+    "jwt"
+  ],
+  "author": "Leandro Leite",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/leeandroleeite/exclusible_challenge/issues"
+  },
+  "homepage": "https://github.com/leeandroleeite/exclusible_challenge#readme",
+  "dependencies": {
+    "express": "^4.18.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.16"
+  }
+}
