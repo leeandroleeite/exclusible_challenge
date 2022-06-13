@@ -4,8 +4,7 @@
   "description": "Simple app for user registering API with NodeJS, that will be consumed by a React/NextJS front end.",
   "main": "index.js",
   "scripts": {
-    "start": "ts-node ./index.ts",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon index.ts"
   },
   "repository": {
     "type": "git",
