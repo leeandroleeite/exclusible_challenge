@@ -1,8 +1,11 @@
 import express, { Request, Response } from 'express';
-import {IUser, User } from '../models/user';
+import {User } from '../models/user';
 import bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken';
 
 const router = express.Router()
+
+const JWT_KEY = 'secret'
 
 // Endpoint for user registration
 router.post('/register', async (req: Request, res: Response) => {
@@ -41,7 +44,36 @@ router.post('/login', async (req: Request, res: Response) => {
         })
     }
 
-    res.send(user)
+    const token = jwt.sign({_id: user.id}, JWT_KEY)
+
+    res.cookie('jwt', token, {
+        httpOnly: true,
+        maxAge: 24 * 60 * 60 * 1000 // 1 day
+    })
+
+    res.send({
+        message: 'login successful'
+    })
+}) 
+
+// Authenticated user
+router.get('/user', async (req, res) => {
+    const cookie = req.cookies['jwt']
+
+    const claims: any = jwt.verify(cookie, JWT_KEY)
+
+    
+    if(!claims) {
+        return res.status(401).send({
+            message: 'unauthenticated'
+        })
+    }
+
+    const user: any = await User.findOne({_id: claims._id})
+    const {password, ...data} = await user.toJSON()
+
+    res.send(data)
+
 })
 
 export default router
