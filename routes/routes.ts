@@ -58,22 +58,40 @@ router.post('/login', async (req: Request, res: Response) => {
 
 // Authenticated user
 router.get('/user', async (req, res) => {
-    const cookie = req.cookies['jwt']
+    try {
+        const cookie = req.cookies['jwt']
 
-    const claims: any = jwt.verify(cookie, JWT_KEY)
-
+        const claims: any = jwt.verify(cookie, JWT_KEY)
     
-    if(!claims) {
+        
+        if(!claims) {
+            return res.status(401).send({
+                message: 'unauthenticated'
+            })
+        }
+    
+        const user: any = await User.findOne({_id: claims._id})
+        const {password, ...data} = await user.toJSON()
+    
+        res.send(data)
+    } catch(e) {
         return res.status(401).send({
             message: 'unauthenticated'
         })
     }
+    
 
-    const user: any = await User.findOne({_id: claims._id})
-    const {password, ...data} = await user.toJSON()
+})
 
-    res.send(data)
+// User logout
+router.post('/logout', (req, res) => {
+    res.cookie('jwt', '', {
+        maxAge: 0,
+    })
 
+    res.send({
+        message: 'logout successful'
+    })
 })
 
 export default router
