@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import React from 'react'
+import Link from 'next/link'
 
 const Layout = ({children} : any) => {
   return (
@@ -12,14 +13,20 @@ const Layout = ({children} : any) => {
 
       <nav className="navbar navbar-expand-md navbar-dark bg-dark mb-4">
             <div className="container-fluid">
-                <a className="navbar-brand" href="#">Home</a>
+                <Link href={'/'}>
+                <a className="navbar-brand">Home</a>
+                </Link>
                 <div>
                 <ul className="navbar-nav me-auto mb-2 mb-md-0">
                     <li className="nav-item">
-                    <a className="nav-link active" href="#">Login</a>
+                        <Link href={'/login'}>
+                        <a className="nav-link active">Login</a>
+                        </Link>
                     </li>
                     <li className="nav-item">
-                    <a className="nav-link active" href="#">Register</a>
+                    <Link href={'/register'}>
+                        <a className="nav-link active">Register</a>
+                    </Link>
                     </li>
                 </ul>
                 </div>
