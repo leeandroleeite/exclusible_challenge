@@ -1,10 +1,37 @@
 import type { NextPage } from 'next'
+import { useEffect, useState } from 'react'
 import Layout from '../layouts/Layout'
 
 const Home: NextPage = () => {
+
+  const [message, setMessage] = useState('')
+  const [auth, setAuth] = useState(false)
+
+  useEffect(() => {
+    
+    (
+     async () => {
+      try {
+        const response = await fetch('http://localhost:8000/api/user', {
+          credentials: 'include',
+        });
+  
+        const result = await response.json();
+        
+        setMessage(`Hello, ${result.email}!`)
+        setAuth(true)
+      } catch (e) {
+        setMessage('You are not logged in!')
+        setAuth(false)
+      }
+     }
+    )();
+    
+  });
+  
   return (
-      <Layout>
-        Home
+      <Layout auth= {auth}>
+        {message}
       </Layout>
   )
 }

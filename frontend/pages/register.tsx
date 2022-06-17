@@ -21,7 +21,6 @@ const Register = () => {
                 password
             })
         })
-        debugger
         await router.push('/login')
     }
 
