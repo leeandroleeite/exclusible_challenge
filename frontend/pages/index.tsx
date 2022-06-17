@@ -4,11 +4,10 @@ import Layout from '../layouts/Layout'
 
 const Home: NextPage = () => {
 
-  const [message, setMessage] = useState('')
+  const [message, setMessage] = useState('You are not logged in')
   const [auth, setAuth] = useState(false)
 
   useEffect(() => {
-    
     (
      async () => {
       try {
@@ -17,9 +16,12 @@ const Home: NextPage = () => {
         });
   
         const result = await response.json();
+
+        if (result.email != undefined) {
+          setMessage(`Hello, ${result.email}!`)
+          setAuth(true)
+        }
         
-        setMessage(`Hello, ${result.email}!`)
-        setAuth(true)
       } catch (e) {
         setMessage('You are not logged in!')
         setAuth(false)
