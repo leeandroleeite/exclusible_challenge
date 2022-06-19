@@ -24,7 +24,7 @@ export async function OpenAndStreamWebSocketSubscription() {
             var price = values[0] * spread;
 
             if (price) {
-                console.log(msgTime, pair, price + ', spread: ' + spread)
+                console.log(msgTime, pair, price + ', Spread: ' + spread)
             }
         });
 
@@ -34,7 +34,7 @@ export async function OpenAndStreamWebSocketSubscription() {
 
     }
     catch (e) {
-        console.log("AN EXCEPTION OCCURED :(");
+        console.log("AN EXCEPTION OCCURRED :(");
         console.log(e);
     }
 };
