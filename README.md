@@ -1,7 +1,3 @@
-# exclusible_challenge
-Simple app for user registering API with NodeJS, that will be consumed by a React/NextJS front end.
-
-
 # Exclusible Tech Coding Challenge
 
 ## Simple app using using a NodeJS backend consumed by a NextJS frontend. This app allows the client to manage a database of users (CRUD) and retrieve BTCUSD exchange rate.
@@ -22,15 +18,12 @@ Status: This backend is currently under active development and might not be read
 - Unit testing (Jest)
 - Documentation generation
 
-
 ## Used technologies
 
 - Docker
 - NodeJS, ExpressJS, Typescript
 - MongoDB Atlas, Mongoose
 - Bcrypt, JWT, CookieParser, Cors
-
-
 
 
 ## Get it Running
