@@ -6,7 +6,7 @@ services:
       context: ./api
       dockerfile: ./Dockerfile
 
-    image: "myapi"
+    image: "exclusible_backend"
     ports:
       - "8000:8000"
 
@@ -15,7 +15,7 @@ services:
       context: ./frontend
       dockerfile: Dockerfile
     
-    image: "frontend"
+    image: "exclusible_frontend"
     ports:
       - "3000:3000"
 
