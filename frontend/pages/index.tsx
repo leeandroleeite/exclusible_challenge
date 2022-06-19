@@ -10,36 +10,36 @@ const Home: NextPage = () => {
 
   useEffect(() => {
     (
-     async () => {
-      try {
-        const response = await fetch('http://localhost:8000/api/user', {
-          credentials: 'include',
-        });
-  
-        const result = await response.json();
+      async () => {
+        try {
+          const response = await fetch('http://localhost:8000/api/user', {
+            credentials: 'include',
+          });
 
-        if (result.email != undefined) {
-          setMessage(`Hello, ${result.email}!`)
-          setAuth(true)
+          const result = await response.json();
+
+          if (result.email != undefined) {
+            setMessage(`Hello, ${result.email}!`)
+            setAuth(true)
+          }
+
+        } catch (e) {
+          setMessage('You are not logged in!')
+          setAuth(false)
         }
-        
-      } catch (e) {
-        setMessage('You are not logged in!')
-        setAuth(false)
       }
-     }
     )();
-    
+
   });
-  
+
   return (
     <>
-      <Layout auth= {auth}>
+      <Layout auth={auth}>
         {message}
       </Layout>
 
-      {auth? <Table/> : ""}
-  </>
+      {auth ? <Table /> : ""}
+    </>
   )
 }
 

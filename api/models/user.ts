@@ -6,7 +6,7 @@ interface IUser {
     password: string;
 }
 
-interface IUserDoc extends IUser, Document {}
+interface IUserDoc extends IUser, Document { }
 
 const userSchema = new Schema({
 
@@ -29,4 +29,4 @@ const userSchema = new Schema({
 
 const User = model<IUserDoc>('User', userSchema)
 
-export {IUser, User}
+export { IUser, User }

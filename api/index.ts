@@ -3,7 +3,7 @@ import express from 'express';
 import routes from './routes/routes';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
-import { OpenAndStreamWebSocketSubscription } from './web-socket/web-socket';
+import { OpenAndStreamWebSocketSubscription } from './web-socket/kraken-api';
 import { connectDB } from './db/mongoose';
 
 // Express app

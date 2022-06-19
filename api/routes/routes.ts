@@ -1,5 +1,5 @@
 import express, { Request, Response } from 'express';
-import {User } from '../models/user';
+import { User } from '../models/user';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 
@@ -8,9 +8,9 @@ const JWT_KEY = 'secret'
 
 // User registration
 router.post('/register', async (req: Request, res: Response) => {
-    const user: any = await User.findOne({email: req.body.email})
+    const user: any = await User.findOne({ email: req.body.email })
 
-    if(user) {
+    if (user) {
         return res.status(404).send({
             message: 'user already exists'
         })
@@ -19,14 +19,14 @@ router.post('/register', async (req: Request, res: Response) => {
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(req.body.password, salt);
 
-    const newUser = new User ({
+    const newUser = new User({
         name: req.body.name,
         email: req.body.email,
         password: hashedPassword
     })
 
     const result = await newUser.save()
-    const {password, ...data} = result.toJSON()
+    const { password, ...data } = result.toJSON()
 
     res.send(data)
 })
@@ -34,14 +34,14 @@ router.post('/register', async (req: Request, res: Response) => {
 // User login
 router.post('/login', async (req: Request, res: Response) => {
 
-    const user: any = await User.findOne({email: req.body.email})
+    const user: any = await User.findOne({ email: req.body.email })
 
-    if(!user) {
+    if (!user) {
         return res.status(404).send({
             message: 'user not found'
         })
     }
-    
+
     const passwordCheck = await bcrypt.compare(req.body.password, user.password)
 
     if (!passwordCheck) {
@@ -50,7 +50,7 @@ router.post('/login', async (req: Request, res: Response) => {
         })
     }
 
-    const token = jwt.sign({_id: user.id}, JWT_KEY)
+    const token = jwt.sign({ _id: user.id }, JWT_KEY)
 
     res.cookie('jwt', token, {
         httpOnly: true,
@@ -60,26 +60,26 @@ router.post('/login', async (req: Request, res: Response) => {
     res.send({
         message: 'login successful'
     })
-}) 
+})
 
 // User auth
 router.get('/user', async (req, res) => {
     try {
         const cookie = req.cookies['jwt']
         const claims: any = jwt.verify(cookie, JWT_KEY)
-    
-        if(!claims) {
+
+        if (!claims) {
             return res.status(401).send({
                 message: 'unauthenticated'
             })
         }
-    
-        const user: any = await User.findOne({_id: claims._id})
-        const {password, ...data} = await user.toJSON()
-    
+
+        const user: any = await User.findOne({ _id: claims._id })
+        const { password, ...data } = await user.toJSON()
+
         res.send(data)
 
-    } catch(e) {
+    } catch (e) {
         return res.status(401).send({
             message: 'unauthenticated'
         })
@@ -102,7 +102,7 @@ router.post('/logout', (req, res) => {
 router.get('/users', async (req, res) => {
     const users = await User.find({})
 
-    if(!users) {
+    if (!users) {
         return res.status(404).send({
             message: 'user list is empty'
         })
@@ -120,22 +120,14 @@ router.delete('/drop', async (req, res) => {
 // Remove all users
 router.delete('/delete/:email', async (req, res) => {
     const email = req.params.email
-
-    // prevent deleting 
-    if (email == "user@exclusible.com") {
-        res.send({message: "user can't be deleted"})
-        return
-    } 
-    const user: any = await User.findOne({email})
-
-    console.log(user)
+    const user: any = await User.findOne({ email })
 
     if (user !== null) {
         await user.remove()
-        res.send({message: "user has been removed: " + req.body.email})
+        res.send({ message: "user has been removed: " + req.body.email })
 
     } else {
-        res.send({message: "user not found"})
+        res.send({ message: "user not found" })
     }
 })
 

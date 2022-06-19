@@ -2,23 +2,23 @@ import Head from 'next/head'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
-const Layout = (props : any) => {
+const Layout = (props: any) => {
 
     const router = useRouter();
 
     const logout = async () => {
         await fetch('http://localhost:8000/api/logout', {
-          method: "POST",
-          credentials: 'include',
-          headers: { 'Content-Type': 'application/json'},
-      })
+            method: "POST",
+            credentials: 'include',
+            headers: { 'Content-Type': 'application/json' },
+        })
 
-      await router.push('/login')
+        await router.push('/login')
     }
 
     let menu;
 
-    if(!props.auth) {
+    if (!props.auth) {
         menu = (
             <ul className="navbar-nav me-auto mb-2 mb-md-0">
                 <li className="nav-item">
@@ -45,16 +45,16 @@ const Layout = (props : any) => {
 
     return (
         <>
-        <Head>
-            <title>Exclusible</title>
-            <link rel="icon" href="/favicon.ico" />
-            <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossOrigin="anonymous"></link>
-        </Head>
+            <Head>
+                <title>Exclusible</title>
+                <link rel="icon" href="/favicon.ico" />
+                <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossOrigin="anonymous"></link>
+            </Head>
 
-        <nav className="navbar navbar-expand-md navbar-dark bg-dark mb-4">
+            <nav className="navbar navbar-expand-md navbar-dark bg-dark mb-4">
                 <div className="container-fluid">
                     <Link href={'/'}>
-                    <a className="navbar-brand">Home</a>
+                        <a className="navbar-brand">Home</a>
                     </Link>
                     <div>
                         {menu}
