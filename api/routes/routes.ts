@@ -111,7 +111,7 @@ router.get('/users', async (req, res) => {
 })
 
 // Remove all users
-router.delete('/drop', async (req, res) => {
+router.delete('/clean', async (req, res) => {
     const users = await User.remove()
 
     res.send(users)
@@ -124,7 +124,7 @@ router.delete('/delete/:email', async (req, res) => {
 
     if (user !== null) {
         await user.remove()
-        res.send({ message: "user has been removed: " + req.body.email })
+        res.send({ message: "user has been removed: " + email })
 
     } else {
         res.send({ message: "user not found" })
