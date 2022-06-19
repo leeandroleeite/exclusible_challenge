@@ -32,16 +32,18 @@ const Register = () => {
                     <input type="text" className="form-control" placeholder="Name" required onChange={e => setName(e.target.value)}/>
                     <label htmlFor="floatingInput">Name</label>
                 </div>
+                <br />
                 <div className="form-floating">
                     <input type="email" className="form-control" placeholder="name@example.com" required onChange={e => setEmail(e.target.value)}/>
                     <label htmlFor="floatingInput">Email</label>
                 </div>
+                <br />
                 <div className="form-floating">
                     <input 
                         type="password" className="form-control" placeholder="Password" required onChange={e => setPassword(e.target.value)}/>
                     <label htmlFor="floatingPassword">Password</label>
                 </div>
-                <button className="w-100 btn btn-lg btn-primary" type="submit">Submit</button>
+                <button className="w-100 btn btn-lg btn-secondary" type="submit">Submit</button>
             </form>
         </Layout>
     )

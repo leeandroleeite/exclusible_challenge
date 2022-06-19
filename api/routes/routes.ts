@@ -117,4 +117,26 @@ router.delete('/drop', async (req, res) => {
     res.send(users)
 })
 
+// Remove all users
+router.delete('/delete/:email', async (req, res) => {
+    const email = req.params.email
+
+    // prevent deleting 
+    if (email == "user@exclusible.com") {
+        res.send({message: "user can't be deleted"})
+        return
+    } 
+    const user: any = await User.findOne({email})
+
+    console.log(user)
+
+    if (user !== null) {
+        await user.remove()
+        res.send({message: "user has been removed: " + req.body.email})
+
+    } else {
+        res.send({message: "user not found"})
+    }
+})
+
 export default router

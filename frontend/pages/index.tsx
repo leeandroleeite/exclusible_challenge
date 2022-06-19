@@ -1,5 +1,6 @@
 import type { NextPage } from 'next'
 import { useEffect, useState } from 'react'
+import Table from '../components/Table'
 import Layout from '../layouts/Layout'
 
 const Home: NextPage = () => {
@@ -32,9 +33,13 @@ const Home: NextPage = () => {
   });
   
   return (
+    <>
       <Layout auth= {auth}>
         {message}
       </Layout>
+
+      {auth? <Table/> : ""}
+  </>
   )
 }
 
